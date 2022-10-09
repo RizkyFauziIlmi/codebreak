@@ -13,5 +13,14 @@
 }
 
 .Heading:not(:first-child) {
-    padding-top: 100px;
+    padding-top: 60px;
+}
+
+.scale {
+    transition: all 0.5s;
+    transform: none;
+}
+
+.scale:hover {
+    transform: scale(1.1);
 }

@@ -39,7 +39,7 @@ export const Nav = () => {
     ]
   return (
     <Flex width={'100%'} alignItems={'center'} justifyContent={'space-around'} p={2} boxShadow={'lg'}>
-        <Heading>CodeBreak</Heading>
+        <Heading onClick={() => document.location.reload()} cursor={'pointer'}>CodeBreak</Heading>
             <Flex>
                 {buttonsRestApi.map((button) => {
                     return(

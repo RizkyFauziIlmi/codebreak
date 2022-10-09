@@ -31,6 +31,7 @@ import SwapTwoVariable from "../components/Java/SwapTwoVariable";
 import { BasicStructure } from "../components/Java/BasicStructure";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { motion } from 'framer-motion'
+import { Index } from "../components/Index";
 
 export const Main = () => {
   const [material, setMaterial] = React.useState("");
@@ -64,9 +65,9 @@ export const Main = () => {
       color: "white",
       buttons: [
         {
-          heading: "Basic Structure",
-          hook: "basicstructurejava",
-          conditioning: material === "basicstructurejava",
+          heading: "Struktur Dasar",
+          hook: "strukturdasarjava",
+          conditioning: material === "strukturdasarjava",
           icon: FaJava,
           preicon: FaTerminal, 
           jsx: <BasicStructure />,
@@ -80,17 +81,17 @@ export const Main = () => {
           jsx: <HelloWorldJava />,
         },
         {
-          heading: "Variable",
-          hook: "variablejava",
-          conditioning: material === "variablejava",
+          heading: "Variabel",
+          hook: "variabeljava",
+          conditioning: material === "variabeljava",
           icon: FaJava,
           preicon: FaTerminal,
           jsx: <VariableJava />,
         },
         {
-          heading: "Swap Two Varible",
-          hook: "swaptwovariablejava",
-          conditioning: material === "swaptwovariablerjava",
+          heading: "Menukar Dua Variabel",
+          hook: "menukarduavariabeljava",
+          conditioning: material === "menukarduavariabeljava",
           icon: FaJava,
           preicon: FaTerminal,
           jsx: <SwapTwoVariable />,
@@ -122,23 +123,25 @@ export const Main = () => {
   ];
 
   const showMaterial = () => {
-    if (material === "basicstructurejava") {
+    if (material === "strukturdasarjava") {
       return <BasicStructure />
     } else if (material === "helloworldjava") {
       return <HelloWorldJava />;
-    } else if (material === "variablejava") {
+    } else if (material === "variabeljava") {
       return <VariableJava />;
-    } else if (material === "swaptwovariablejava") {
+    } else if (material === "menukarduavariabeljava") {
       return <SwapTwoVariable />;
     } else if (material === "helloworldpython") {
       return <p>ok</p>;
     } else if (material === "variablepython") {
       return <p>ok2</p>;
+    } else {
+      return <Index />
     }
   };
 
   return (
-    <Flex width={"100vw"} overflow={'hidden'} p={10}>
+    <Flex width={"100vw"} overflow={'hidden'} p={material === "" ? 0 : 10}>
       <Box width={'max-content'} display={displayAccordion}>
         <Accordion defaultIndex={0} width={'max-content'}>
           {datasMain.map((data) => {
