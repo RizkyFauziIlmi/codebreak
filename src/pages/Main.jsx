@@ -138,7 +138,7 @@ export const Main = () => {
   };
 
   return (
-    <Flex width={"100vw"} overflow={'hidden'} p={5}>
+    <Flex width={"100vw"} overflow={'hidden'} p={10}>
       <Box width={'max-content'} display={displayAccordion}>
         <Accordion defaultIndex={0} width={'max-content'}>
           {datasMain.map((data) => {
@@ -185,7 +185,7 @@ export const Main = () => {
       <motion.div
         drag
         dragConstraints={{ top: -5, left: -5, right: 50, bottom: 50 }}
-        style={{ zIndex: 9999 }}
+        style={{ zIndex: 9999, position: 'absolute' }}
       >
         <IconButton ref={btnRef} onClick={onOpen} variant={'solid'} display={displayMenu} ml={2} mt={2} icon={<HamburgerIcon />} />
       </motion.div>
@@ -194,6 +194,7 @@ export const Main = () => {
         placement={'right'}
         onClose={onClose}
         finalFocusRef={btnRef}
+        size={'xs'}
       >
         <DrawerOverlay />
         <DrawerContent>
