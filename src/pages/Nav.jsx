@@ -43,7 +43,7 @@ export const Nav = () => {
             <Flex>
                 {buttonsRestApi.map((button) => {
                     return(
-                        <Button variant={'ghost'} colorScheme={button.colorScheme} onMouseEnter={() => {button.setHook.on()}} onMouseLeave={() => {button.setHook.off()}}>
+                        <Button key={button.programmingLangguage} variant={'ghost'} colorScheme={button.colorScheme} onMouseEnter={() => {button.setHook.on()}} onMouseLeave={() => {button.setHook.off()}}>
                             <Image src={button.img} width={button.width} />
                             <Collapse in={button.hook} animateOpacity>
                                 {button.hook ? <Text transition={'all 1s'}>{button.programmingLangguage}</Text> : ''}

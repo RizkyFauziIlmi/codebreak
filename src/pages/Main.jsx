@@ -1,11 +1,18 @@
 import {
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
-  Heading,
+  IconButton,
   List,
   ListIcon,
   ListItem,
-  OrderedList,
+  useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -22,9 +29,33 @@ import HelloWorldJava from "../components/Java/HelloWorldJava";
 import VariableJava from "../components/Java/VariableJava";
 import SwapTwoVariable from "../components/Java/SwapTwoVariable";
 import { BasicStructure } from "../components/Java/BasicStructure";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { motion } from 'framer-motion'
 
 export const Main = () => {
   const [material, setMaterial] = React.useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
+
+  const displayAccordion = useBreakpointValue(
+    {
+      base: 'none',
+      md: 'inherit'
+    },
+    {
+      fallback: 'md'
+    }
+  )
+
+  const displayMenu = useBreakpointValue(
+    {
+      base: 'inherit',
+      md: 'none'
+    },
+    {
+      fallback: 'md'
+    }
+  )
 
   const datasMain = [
     {
@@ -107,12 +138,12 @@ export const Main = () => {
   };
 
   return (
-    <Flex width={"100vw"}>
-      <Box width={'max-content'}>
-        <Accordion allowToggle defaultIndex={0} width={'max-content'}>
+    <Flex width={"100vw"} overflow={'hidden'} p={5}>
+      <Box width={'max-content'} display={displayAccordion}>
+        <Accordion defaultIndex={0} width={'max-content'}>
           {datasMain.map((data) => {
             return (
-              <AccordionItem>
+              <AccordionItem key={data.langguage}>
                 <h2>
                   <AccordionButton
                     _expanded={{ bg: data.bg, color: data.color }}
@@ -127,7 +158,7 @@ export const Main = () => {
                   <List spacing={3}>
                     {data.buttons.map((button) => {
                       return (
-                        <ListItem>
+                        <ListItem key={button.heading}>
                           <ListIcon
                             as={
                               button.conditioning ? button.icon : button.preicon
@@ -151,7 +182,69 @@ export const Main = () => {
           })}
         </Accordion>
       </Box>
-      <Box width={"100%"}>
+      <motion.div
+        drag
+        dragConstraints={{ top: -5, left: -5, right: 50, bottom: 50 }}
+        style={{ zIndex: 9999 }}
+      >
+        <IconButton ref={btnRef} onClick={onOpen} variant={'solid'} display={displayMenu} ml={2} mt={2} icon={<HamburgerIcon />} />
+      </motion.div>
+      <Drawer
+        isOpen={isOpen}
+        placement={'right'}
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerBody>
+          <Accordion defaultIndex={0} width={'100%'}>
+          {datasMain.map((data) => {
+            return (
+              <AccordionItem key={data.langguage}>
+                  <h2>
+                    <AccordionButton
+                      _expanded={{ bg: data.bg, color: data.color }}
+                    >
+                      <Box flex="1" textAlign="left">
+                        <Text fontWeight={"bold"}>{data.langguage}</Text>
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel>
+                    <List spacing={3}>
+                      {data.buttons.map((button) => {
+                        return (
+                          <ListItem key={button.heading}>
+                            <ListIcon
+                              as={
+                                button.conditioning ? button.icon : button.preicon
+                              }
+                            />
+                            <Button
+                              variant={"outline"}
+                              onClick={() => {
+                                setMaterial(button.hook);
+                              }}
+                            >
+                              {button.heading}
+                            </Button>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </AccordionPanel>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+      <Box width={"100%"} textAlign={'center'}>
         {showMaterial()}
       </Box>
     </Flex>

@@ -1,8 +1,7 @@
 import { CheckCircleIcon, SettingsIcon } from '@chakra-ui/icons'
-import { VStack, Text, Heading, useColorMode, ListItem, UnorderedList, Code, Button, useToast, ListIcon, List, Flex, useDisclosure, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Modal, ModalHeader, ModalOverlay, ModalCloseButton, ModalBody, ModalFooter, ModalContent, useBoolean } from '@chakra-ui/react'
+import { VStack, Text, Heading, useColorMode, ListItem, UnorderedList, Code, Button, useToast, ListIcon, List, Flex, useDisclosure, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Modal, ModalHeader, ModalOverlay, ModalCloseButton, ModalBody, ModalContent, useBoolean, Kbd } from '@chakra-ui/react'
 import CodeEditor from '@uiw/react-textarea-code-editor'
 import React from 'react'
-import "../../global/index.css"
 
 export const BasicStructure = () => {
     const [code] = React.useState("//Import library disini\nimport java.util.Scanner;\n\npublic class namaFile {\n   //Memberitahu compiler bahwa fungsi main sebagai awal code\n   public static void main(String[] args) {\n       //Kode kamu mulai disini\n  }\n}")
@@ -15,22 +14,37 @@ export const BasicStructure = () => {
     const [testSatu, setTestSatu] = useBoolean();
     const [testDua, setTestDua] = useBoolean();
     const [testTiga, setTestTiga] = useBoolean();
+    const id = "id"; 
+    const syaratSatu = exerciseCode.includes("import java.util.Scanner;");
+    const syaratDua = exerciseCode.includes("public class ") && exerciseCode.includes("class strukturDasar");
+    const syaratTiga = exerciseCode.includes("public static void main(String[] args) {}");
 
     const testCode = () => {
-        if (exerciseCode.includes("import java.util.Scanner;")) {
+        if (syaratSatu) {
             setTestSatu.on()    
         } else {
             setTestSatu.off()
         }
-        if (exerciseCode.includes("public class ") && exerciseCode.includes("class strukturDasar")) {
+        if (syaratDua) {
             setTestDua.on()
         } else {
             setTestDua.off()
         }
-        if (exerciseCode.includes("public class strukturDasar {\n   public static void main(String[] args) {\n\n    }\n}")) {
+        if (syaratTiga) {
             setTestTiga.on()
         } else {
             setTestTiga.off()
+        }
+        if (syaratSatu && syaratDua && syaratTiga) {
+            if (!toast.isActive(id)) {
+                toast({
+                    id,
+                    title: "Benar!",
+                    description: "Kerja Bagus, kamu hebat!",
+                    status: "success",
+                    isClosable: true
+                })
+            }
         }
     }
 
@@ -118,12 +132,18 @@ export const BasicStructure = () => {
                 </Button>
             </Flex>
         <Heading size={'sm'} className='Heading'>Kesimpulan : </Heading>
-        <UnorderedList>
+        <UnorderedList textAlign={'left'}>
             <ListItem>
                 <Text>Bagian paling atas code sebagai tempat <Code children="import"/> berbagai library yang berguna</Text>
             </ListItem>
             <ListItem>
-                <Text>Awal code di mulai dengan <Code children="public class"/> dan diikuti 'NAMA FILE'</Text>
+                <Text>Awal code di mulai dengan <Code children="public class"/> dan diikuti 'Nama File Tanpa <Kbd>space</Kbd>'</Text>
+            </ListItem>
+            <ListItem>
+                <Text>Berikutnya mendeklarasikan fungsi main <Code children="public static void main(String[] args) {}"/> di dalam <Code children="public class"/></Text>
+            </ListItem>
+            <ListItem>
+                <Text>Dan kode kamu ada di dalam fungsi main</Text>
             </ListItem>
         </UnorderedList>
         <Modal isOpen={hint.isOpen} onClose={hint.onClose} isCentered>
@@ -134,7 +154,7 @@ export const BasicStructure = () => {
           <ModalBody>
             <div data-color-mode={colorMode === "dark" ? "dark" : "light"}>
                     <CodeEditor
-                    value={("import java.util.Scanner;\n public class namaFile {\n  public static void main(String[] args) {\n\n    }\n}")}
+                    value={("import java.util.Scanner;\n public class strukturDasar {\n  public static void main(String[] args) {\n\n    }\n}")}
                     language="java"
                     placeholder="Please enter JS code."
                     padding={15}
