@@ -62,7 +62,7 @@ const HelloWorldJava = () => {
             style={{
                 fontFamily:
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12
+                fontSize: 10
             }}
             disabled
             />
@@ -76,7 +76,7 @@ const HelloWorldJava = () => {
             style={{
                 fontFamily:
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12
+                fontSize: 10
             }}
             disabled
             />
@@ -93,7 +93,7 @@ const HelloWorldJava = () => {
             style={{
                 fontFamily:
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12
+                fontSize: 10
             }}
             disabled
             />
@@ -107,7 +107,7 @@ const HelloWorldJava = () => {
             style={{
                 fontFamily:
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-                fontSize: 12
+                fontSize: 10
             }}
             disabled
             />
