@@ -186,12 +186,12 @@ export const Main = () => {
         </Accordion>
       </Box>
       <motion.div
-        drag
-        dragConstraints={{ top: -5, left: -5, right: 50, bottom: 50 }}
-        style={{ zIndex: 9999, position: 'absolute' }}
-      >
-        <IconButton ref={btnRef} onClick={onOpen} variant={'solid'} display={displayMenu} ml={2} mt={2} icon={<HamburgerIcon />} />
-      </motion.div>
+          drag
+          dragConstraints={{ top: -5, left: -5, right: 50, bottom: 50 }}
+          style={{ zIndex: 9999, position: 'absolute' }}
+          >
+            <IconButton ref={btnRef} onClick={onOpen} variant={'solid'} display={isOpen ? 'none' : displayMenu} ml={2} mt={2} icon={<HamburgerIcon />} />
+          </motion.div>
       <Drawer
         isOpen={isOpen}
         placement={'right'}
