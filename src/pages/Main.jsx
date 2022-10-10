@@ -141,7 +141,7 @@ export const Main = () => {
   };
 
   return (
-    <Flex width={"100vw"} overflow={'hidden'} p={material === "" ? 0 : 10}>
+    <Flex width={"100vw"} overflow={'hidden'}>
       <Box width={'max-content'} display={displayAccordion}>
         <Accordion defaultIndex={0} width={'max-content'}>
           {datasMain.map((data) => {
@@ -248,7 +248,7 @@ export const Main = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      <Box width={"100%"} textAlign={'center'}>
+      <Box width={"100%"} textAlign={'center'} p={material === "" ? 0 : 10}>
         {showMaterial()}
       </Box>
     </Flex>
